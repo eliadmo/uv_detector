@@ -1,4 +1,3 @@
-
 /* 
  * A UV regulated E.Coli bio-sensor.
  *
@@ -13,27 +12,27 @@
  */
 
 
-(~) mRFP1              <- ['BBa_E1010'];         //  **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)
+(~) mRFP1              <- ['5CB5.a'];         //  **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)
 (~) GFPmut3b           <- ['BBa_E0040'];        //  green fluorescent protein derived from jellyfish Aequeora victoria wild-type GFP (SwissProt: P42212)
 (~) uv_promoter        <- ['BBa_I765001'];     //  UV promoter
 (~) lacI_repressor     <- ['BBa_C0012'];      //  lacI repressor from E.coli
 (~) double_terminator  <- ['BBa_B0015'];     //  double terminator
 (~) strong_rbs         <- ['BBa_B0030'];    //  strong rbs
-(~) lacI_promoter      <- ['BBa_B0030'];   //  negatively regulated lacI promoter
+(~) lacI_promoter      <- ['BBa_R0010'];   //  negatively regulated lacI promoter
 
 
-(~) uv_regulated_lacI_and_rfp_exp  <- +promoter{[uv_promoter]} rbs{[strong_rbs]} cds{[lacI_repressor]} dna{att att} cds{[mRFP1]} terminator{[double_terminator]};
+
+(~) uv_regulated_lacI_and_rfp_exp optimized for (Plexaura homomalla) <- +promoter{ [uv_promoter] } rbs{[strong_rbs]} cds{[lacI_repressor]} dna{att att} cds{[mRFP1]} terminator{[double_terminator]};
 	
 (~) lacI_negatively_regulated_gfp_exp <- -promoter{ [lacI_promoter]} rbs{[strong_rbs]}  cds{[GFPmut3b]} terminator{[double_terminator]};
-
-
-
 
 (~) uv_detector_insert <- [uv_regulated_lacI_and_rfp_exp] [lacI_negatively_regulated_gfp_exp];
 
 
 // Create a plasmid variable named 'uv_detector_plasmid' and assign to it the plasmid backbone 'pSB1C3'
-(o) uv_detector_plasmid <- ['pSB1C3'] ;
+(o) uv_detector_plasmid <- ['pSB1C3']  ;
 
 // Use the 'u' (Add Plasmid Insert) operator to assign the 'uv_detector_insert' strand variable as an insert to 'uv_detector_plasmid'
 uv_detector_plasmid u [uv_detector_insert]; 
+
+
